@@ -6,13 +6,24 @@
   <title>Practicle Javascript</title>
 </head>
 <body>
+  <h1>Todo List</h1>
+
+
+  <button id="displayTodosButton">Display Todos</button>
+  <button id="toggleAll">Toggle All</button>
 
 
   <script>
+
+    
+    
+
+
     // var todos = ['item 1', 'item 2', 'item 3']
     var todoList = {
       todos: [],
       displayTodos: function(){
+        debugger;
         //checks if todo is empty
         if (this.todos.length === 0) {
           console.log('Your todo list is empty!');
@@ -22,7 +33,7 @@
             if( this.todos[i].completed === true) {
               console.log('(x)', this.todos[i].todoText);
             } else {
-              console.log('( )', this.todos[i].totoText);
+              console.log('( )', this.todos[i].todoText);
             }
          }
         }
@@ -50,22 +61,38 @@
       toggleAll: function(){
         var totalTodos = this.todos.length;
         var completedTodos = 0;
+        //start completed list at zero, and create a loop to grab completed
         for (var i = 0; i < totalTodos; i++) {
+          //of the looped todos, the completed ones add 1 to completedTodos.
           if (this.todos[i].completed === true) {
             completedTodos++;
           }
         }
+        // loop through see if completedTodos and totalTodos are equal
+        // if list is all complete toggle them all false
         if (completedTodos === totalTodos){
           for (var i = 0; i < totalTodos; i++) {
             this.todos[i].completed = false;
           }
-
-
+          // if less than all completed, toggle them all true
+        } else {
+            for (var i = 0; i < totalTodos; i++) {
+              this.todos[i].completed = true;
+            }
         }
+        this.displayTodos();
       }
-
-
     }
+    var displayTodoButton = document.getElementById('displayTodosButton');
+    var toggleAll = document.getElementById('toggleAll');
+
+    displayTodoButton.addEventListener('click', function() {
+      todoList.displayTodos();
+    });
+    toggleAll.addEventListener('click', function() {
+      todoList.toggleAll();
+    });
+
 
   </script>
 </body>
