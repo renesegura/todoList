@@ -7,21 +7,28 @@
 </head>
 <body>
   <h1>Todo List</h1>
-
-
-  <button onclick="handlers.displayTodos()">Display Todos</button>
-  <button onclick="handlers.toggleAll()">Toggle All</button>
-
-
+  <div>
+    <button onclick="handlers.displayTodos()">Display Todos</button>
+    <button onclick="handlers.toggleAll()">Toggle All</button>
+  </div>
+  <div>
+    <button onclick="handlers.addTodo()">Add</button>
+    <input type="text" id="addTodoTextInput">
+  </div>
+  <div>
+    <button onclick="handlers.changeTodo()">Change</button>
+    <input type="number" id="changeTodoPositionInput">
+    <input type="text" id="changeTodoTextInput">
+  </div>
   <script>
-
-    
-    
-
-
     // var todos = ['item 1', 'item 2', 'item 3']
+    // var todoList = {
+    //   todos: ['item 1', 'item 2', 'item 3'],
     var todoList = {
       todos: [],
+    // console.log('My todos: ', todos)
+    	// function displayTodos() {
+      //    console.log('My todos: ', todos);
       displayTodos: function(){
         //checks if todo is empty
         if (this.todos.length === 0) {
@@ -37,6 +44,9 @@
          }
         }
       },
+      // todos.push('item 1')
+      // function addTodo(todo) {
+      //   todo.push(todo);
       addTodo: function(todoText){
         this.todos.push({
           todoText: todoText,
@@ -44,10 +54,16 @@
         });
         this.displayTodos();
       },
+      // todos[0] = 'item 1 updated'
+      // function changeTodo(position, newValue) {
+      //   todos[position] = newValue;
       changeTodo: function(position, todoText){
         this.todos[position].todoText = todoText;
         this.displayTodos();
       },
+      // todos.splice(3, 1) - deletes item 4, one item
+      // function deleteTodos(position) {
+      //   todos.splice(position, 1);
       deleteTodo: function(position) {
         this.todos.splice(position, 1);
         this.displayTodos();
@@ -82,16 +98,7 @@
         this.displayTodos();
       }
     }
-    // var displayTodoButton = document.getElementById('displayTodosButton');
-    // var toggleAll = document.getElementById('toggleAll');
-
-    // displayTodoButton.addEventListener('click', function() {
-      
-    // });
-    // toggleAll.addEventListener('click', function() {
-      
-    // });
-
+// Handlers
     var handlers = {
       displayTodos: function() {
         todoList.displayTodos();
@@ -99,10 +106,22 @@
       toggleAll: function() {
         todoList.toggleAll();
       },
+      addTodo: function() {
+        var addTodoTextInput = document.getElementById('addTodoTextInput');
+        todoList.addTodo(addTodoTextInput.value);
+        addTodoTextInput.value = '';
+      },
+      //grab DOM element. Add valueAsNumber for numbers input
+      changeTodo: function() {
+        var changeTodoPositionInput = document.getElementById('changeTodoPositionInput');
+        var changeTodoTextInput = document.getElementById('changeTodoTextInput');
+        todoList.changeTodo(changeTodoPositionInput.valueAsNumber, changeTodoTextInput.value);
+        changeTodoPositionInput.value = '';
+        changeTodoTextInput.value = '';
 
+        
+      }
     };
-
-
   </script>
 </body>
 </html>
