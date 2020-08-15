@@ -20,6 +20,20 @@
     <input type="number" id="changeTodoPositionInput">
     <input type="text" id="changeTodoTextInput">
   </div>
+  <div>
+    <button onclick="handlers.deleteTodo()">Delete</button>
+    <input type="number" id="deleteTodoPositionInput">
+  </div>
+  <div>
+    <button onclick="handlers.toggleCompleted()">Toggle Completed</button>
+    <input type="number" id="toggleCompletedPositionInput">
+  </div>
+
+  <div>
+    <ul>
+      <li>Bump</li>
+    </ul>
+  </div>
   <script>
     // var todos = ['item 1', 'item 2', 'item 3']
     // var todoList = {
@@ -103,9 +117,6 @@
       displayTodos: function() {
         todoList.displayTodos();
       },
-      toggleAll: function() {
-        todoList.toggleAll();
-      },
       addTodo: function() {
         var addTodoTextInput = document.getElementById('addTodoTextInput');
         todoList.addTodo(addTodoTextInput.value);
@@ -118,9 +129,20 @@
         todoList.changeTodo(changeTodoPositionInput.valueAsNumber, changeTodoTextInput.value);
         changeTodoPositionInput.value = '';
         changeTodoTextInput.value = '';
-
-        
-      }
+      },
+      deleteTodo: function () {
+        var deleteTodoPositionInput = document.getElementById('deleteTodoPositionInput');
+        todoList.deleteTodo(deleteTodoPositionInput.valueAsNumber);
+        deleteTodoPositionInput.value = '';
+      },
+      toggleCompleted: function() {
+        var toggleCompletedPositionInput = document.getElementById('toggleCompletedPositionInput');
+        todoList.toggleCompleted(toggleCompletedPositionInput.valueAsNumber);
+        toggleCompletedPositionInput.value = '';
+      },
+      toggleAll: function () {
+        todoList.toggleAll();
+      },
     };
   </script>
 </body>
